@@ -13,7 +13,6 @@ function validationMiddleware(
       groups,
       skipMissingProperties
     }).then((errors: ValidationError[]) => {
-      console.log(groups);
       if (errors.length > 0) {
         const message = errors
           .map((error: ValidationError) => Object.values(error.constraints))

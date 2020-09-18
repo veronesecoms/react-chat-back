@@ -14,11 +14,13 @@ class AuthService {
     const findedUser: UserDto = await this.users.findOne({
       where: { email: userData.email, active: true }
     });
-    if (!findedUser)
+    if (!findedUser) {
       throw new HttpException(
         409,
         `Não foi possível encontrar o e-mail ${userData.email}`
       );
+      console.log('nao achou user');
+    }
 
     const isPasswordMatching: boolean = await bcrypt.compare(
       userData.password,

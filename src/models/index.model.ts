@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
+import Messages from './messages.model';
 import User from './users.model';
 
 export const sequelize = new Sequelize(
@@ -22,4 +23,4 @@ export const sequelize = new Sequelize(
   }
 );
 
-sequelize.addModels([User]);
+sequelize.addModels([User, Messages]);
