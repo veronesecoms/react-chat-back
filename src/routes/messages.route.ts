@@ -18,6 +18,11 @@ class MessageRoute implements Route {
       authMiddleware,
       this.messageController.getMessagesSummaryFromUser
     );
+    this.router.get(
+      `${this.path}/historic/:emailDestinatary`,
+      authMiddleware,
+      this.messageController.getMessagesFromUser
+    );
   }
 }
 

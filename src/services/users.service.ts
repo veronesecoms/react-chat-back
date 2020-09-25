@@ -21,6 +21,16 @@ class UserService {
     return findUser;
   }
 
+  public async getUserIdByEmail(userEmail: string): Promise<number> {
+    const findedUser: User = await this.users.findOne({
+      where: { email: userEmail }
+    });
+    if (!findedUser) {
+      throw new HttpException(404, `E-mail especificado não existe`);
+    }
+    return findedUser.id;
+  }
+
   public async createUser(userData: User): Promise<User> {
     const findedUser: User = await this.users.findOne({
       where: { email: userData.email }
