@@ -7,6 +7,7 @@
     "test": "jest --forceExit --detectOpenHandles",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
+  "engines": { "node" : "12.16.1" },
   "dependencies": {
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.3.1",
