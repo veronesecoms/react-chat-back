@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import HttpException from '../exceptions/HttpException';
 import userModel from '../models/users.model';
 import User from '../models/users.model';
