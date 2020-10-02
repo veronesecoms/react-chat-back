@@ -30,8 +30,14 @@ class App {
   }
 
   public listen() {
-    // this.io.on('connection', (socket) => {
-    //});
+    this.io.on('connection', (userSocket) => {
+      userSocket.on('join_room', (roomId) => {
+        userSocket.join(roomId);
+      });
+      userSocket.on('message', (data) => {
+        userSocket.to(data.roomId).emit('room_message', data.message);
+      });
+    });
 
     this.http.listen(this.port, async () => {
       console.log(`🚀 App listening on the port ${this.port}`);

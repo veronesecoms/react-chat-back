@@ -2,14 +2,15 @@
   "name": "react-chat-back",
   "version": "0.0.0",
   "scripts": {
-    "start": "cross-env NODE_ENV=production ts-node --transpile-only src/server.ts",
+    "start": "npx sequelize-cli db:migrate && cross-env NODE_ENV=production ts-node --transpile-only src/server.ts",
     "dev": "cross-env NODE_ENV=development nodemon --watch src --delay 1 --exec 'ts-node' src/server.ts",
     "test": "jest --forceExit --detectOpenHandles",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "dependencies": {
     "@types/socket.io": "^2.1.11",
-    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "reflect-metadata": "^0.1.13",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "cookie-parser": "^1.4.5",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.7",
     "@types/dotenv": "^8.2.0",

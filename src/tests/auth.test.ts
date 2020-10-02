@@ -1,57 +1,56 @@
-import * as bcrypt from 'bcrypt';
-import * as request from 'supertest';
-import App from '../app';
-import AuthRoute from '../routes/auth.route';
-import { CreateUserDto } from '../dtos/users.dto';
-import HttpException from '../exceptions/HttpException';
-import { TokenData } from '../interfaces/auth.interface';
-import AuthService from '../services/auth.service';
+import * as bcrypt from "bcryptjs";
+import * as request from "supertest";
+import App from "../app";
+import AuthRoute from "../routes/auth.route";
+import HttpException from "../exceptions/HttpException";
+import { TokenData } from "../interfaces/auth.interface";
+import AuthService from "../services/auth.service";
 
 afterAll(async () => {
-  await new Promise(resolve => setTimeout(() => resolve(), 500));
+  await new Promise((resolve) => setTimeout(() => resolve(), 500));
 });
 
-describe('Testing Auth', () => {
-  describe('[POST] /signup', () => {
-    it('response should have the Create userData', () => {
+describe("Testing Auth", () => {
+  describe("[POST] /signup", () => {
+    it("response should have the Create userData", () => {
       const userData: CreateUserDto = {
-        email: 'lkm@gmail.com',
-        password: 'q1w2e3r4',
+        email: "lkm@gmail.com",
+        password: "q1w2e3r4",
       };
       const authRoute = new AuthRoute();
       const app = new App([authRoute]);
 
       return request(app.getServer())
-                .post(`${authRoute.path}/signup`)
-                .send(userData);
+        .post(`${authRoute.path}/signup`)
+        .send(userData);
     });
   });
 
-  describe('[POST] /login', () => {
-    it('response should have the Set-Cookie header with the Authorization token', async () => {
+  describe("[POST] /login", () => {
+    it("response should have the Set-Cookie header with the Authorization token", async () => {
       const userData: CreateUserDto = {
-        email: 'lim@gmail.com',
-        password: 'q1w2e3r4',
+        email: "lim@gmail.com",
+        password: "q1w2e3r4",
       };
-      process.env.JWT_SECRET = 'jwt_secret';
+      process.env.JWT_SECRET = "jwt_secret";
       const authRoute = new AuthRoute();
       const app = new App([authRoute]);
 
       return request(app.getServer())
-                .post(`${authRoute.path}/login`)
-                .send(userData)
-                .expect('Set-Cookie', /^Authorization=.+/);
+        .post(`${authRoute.path}/login`)
+        .send(userData)
+        .expect("Set-Cookie", /^Authorization=.+/);
     });
   });
 
-  describe('[POST] /logout', () => {
-    it('logout Set-Cookie Authorization=; Max-age=0', () => {
+  describe("[POST] /logout", () => {
+    it("logout Set-Cookie Authorization=; Max-age=0", () => {
       const authRoute = new AuthRoute();
       const app = new App([authRoute]);
 
       return request(app.getServer())
-                .post(`${authRoute.path}/logout`)
-                .expect('Set-Cookie', /^Authorization=\;/);
+        .post(`${authRoute.path}/logout`)
+        .expect("Set-Cookie", /^Authorization=\;/);
     });
   });
 });

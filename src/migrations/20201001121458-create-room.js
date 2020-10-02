@@ -1,13 +1,15 @@
+'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('messages', {
+    await queryInterface.createTable('rooms', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      from_user_id: {
+      id_user_created_room: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: {
@@ -17,7 +19,8 @@ module.exports = {
           allowNull: false,
         },
       },
-      to_user_id: {
+      id_user_joined_room: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: {
@@ -26,9 +29,6 @@ module.exports = {
           key: 'id',
           allowNull: false,
         },
-      },
-      body: {
-        type: Sequelize.STRING(255),
       },
       createdAt: {
         allowNull: false,
@@ -39,12 +39,18 @@ module.exports = {
         type: Sequelize.DATE,
       },
       deletedAt: {
-        allowNull: true,
         type: Sequelize.DATE,
       },
-    })
+    });
+    await queryInterface.addIndex(
+      'rooms',
+      ['id_user_created_room', 'id_user_joined_room'],
+      {
+        indicesType: 'UNIQUE',
+      }
+    );
   },
-  down: async (queryInterface) => {
-    await queryInterface.dropTable('messages')
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Rooms');
   },
-}
+};

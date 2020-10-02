@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import Messages from './messages.model';
+import Rooms from './rooms.model';
 import User from './users.model';
 
 export const sequelize = new Sequelize(
@@ -12,15 +13,15 @@ export const sequelize = new Sequelize(
     timezone: '-03:00',
     define: {
       charset: 'utf8mb4',
-      collate: 'utf8mb4_general_ci'
+      collate: 'utf8mb4_general_ci',
     },
     pool: {
       min: 0,
       max: 30,
       idle: 10000,
-      acquire: 30000
-    }
+      acquire: 30000,
+    },
   }
 );
 
-sequelize.addModels([User, Messages]);
+sequelize.addModels([User, Messages, Rooms]);
