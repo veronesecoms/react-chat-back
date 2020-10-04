@@ -33,7 +33,7 @@ class MessageService {
       `,
       {
         replacements: [userId, userId, userId, userId],
-        type: 'SELECT'
+        type: 'SELECT',
       }
     );
     return messages;
@@ -55,10 +55,23 @@ class MessageService {
       `,
       {
         replacements: [userId, destinataryId, destinataryId, userId],
-        type: 'SELECT'
+        type: 'SELECT',
       }
     );
     return messages;
+  }
+
+  public async createMessage(
+    userId: number,
+    destinataryId: number,
+    body: string
+  ) {
+    const createdMessage: Messages = await this.messages.create({
+      from_user_id: userId,
+      to_user_id: destinataryId,
+      body: body,
+    });
+    return createdMessage;
   }
 }
 

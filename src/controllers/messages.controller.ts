@@ -49,6 +49,30 @@ class MessagesController {
       next(error);
     }
   };
+
+  public saveMessage = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const userToken: string = req.headers.authorization;
+      const userId: number = this.authService.getUserIdByToken(userToken);
+      const emailDestinatary: string = req.params.emailDestinatary;
+      const destinataryId: number = await this.userService.getUserIdByEmail(
+        emailDestinatary
+      );
+      const body = req.body.body;
+      const createdMessage = await this.messageService.createMessage(
+        userId,
+        destinataryId,
+        body
+      );
+      return res.status(200).json(createdMessage);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MessagesController;
