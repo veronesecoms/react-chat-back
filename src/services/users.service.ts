@@ -1,9 +1,9 @@
-import * as crypto from "crypto";
-import * as bcrypt from "bcryptjs";
-import HttpException from "../exceptions/HttpException";
-import userModel from "../models/users.model";
-import User from "../models/users.model";
-import MailerService from "./mailer.service";
+import * as crypto from 'crypto';
+import * as bcrypt from 'bcryptjs';
+import HttpException from '../exceptions/HttpException';
+import userModel from '../models/users.model';
+import User from '../models/users.model';
+import MailerService from './mailer.service';
 
 class UserService {
   public users = userModel;
@@ -44,7 +44,7 @@ class UserService {
 
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const generatedEmailToken: string =
-      crypto.randomBytes(46).toString("hex") + userData.email;
+      crypto.randomBytes(46).toString('hex') + userData.email;
     const createdUserData: User = await this.users.create({
       ...userData,
       password: hashedPassword,
@@ -64,7 +64,7 @@ class UserService {
       where: { confirm_email_token: userToken },
     });
     if (!user) {
-      throw new HttpException(400, "Token fornecido não pertence a uma conta");
+      throw new HttpException(400, 'Token fornecido não pertence a uma conta');
     }
     const updatedUser: User = await user.update({
       ...user,
@@ -80,10 +80,10 @@ class UserService {
       where: { email: email, active: true },
     });
     if (!user) {
-      throw new HttpException(400, "Email não pertence a uma conta válida");
+      throw new HttpException(400, 'Email não pertence a uma conta válida');
     }
     const generatedPasswordToken: string =
-      crypto.randomBytes(46).toString("hex") + email;
+      crypto.randomBytes(46).toString('hex') + email;
     await user.update({
       ...user,
       password_recovery_token: generatedPasswordToken,
@@ -99,7 +99,7 @@ class UserService {
       where: { password_recovery_token: passwordToken },
     });
     if (!user) {
-      throw new HttpException(400, "Token fornecido não pertence a uma conta");
+      throw new HttpException(400, 'Token fornecido não pertence a uma conta');
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     await user.update({
