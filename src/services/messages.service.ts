@@ -64,12 +64,12 @@ class MessageService {
   public async createMessage(
     userId: number,
     destinataryId: number,
-    body: string
+    message: string
   ) {
     const createdMessage: Messages = await this.messages.create({
       from_user_id: userId,
       to_user_id: destinataryId,
-      body: body,
+      body: message,
     });
     return createdMessage;
   }

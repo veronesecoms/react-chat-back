@@ -9,7 +9,6 @@ import * as socketIo from 'socket.io';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 import { sequelize } from './models/index.model';
-import MessagesController from 'controllers/messages.controller';
 
 class App {
   public app: express.Application;
@@ -18,10 +17,7 @@ class App {
   public env: boolean;
   public io: SocketIO.Server;
 
-  constructor(
-    routes: Routes[],
-    public messageController: MessagesController = new MessagesController()
-  ) {
+  constructor(routes: Routes[]) {
     this.app = express();
     this.http = new http.Server(this.app);
     this.io = socketIo(this.http);
@@ -40,7 +36,6 @@ class App {
       });
       userSocket.on('message', (data) => {
         userSocket.to(data.roomId).emit('room_message', data.message);
-        this.messageController.saveMessage(data);
       });
     });
 

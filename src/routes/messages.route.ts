@@ -23,6 +23,11 @@ class MessageRoute implements Route {
       authMiddleware,
       this.messageController.getMessagesFromUser
     );
+    this.router.post(
+      `${this.path}`,
+      authMiddleware,
+      this.messageController.saveMessage
+    );
   }
 }
 
