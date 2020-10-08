@@ -1,4 +1,4 @@
-# React Chat Frontend :speech_balloon:
+# React Chat Backend :speech_balloon:
 > This project is the backend of my personal project that i called React Chat. <br>
 
  [![Actions Status](https://github.com/veronesecoms/react-chat-front/workflows/CI/badge.svg)](https://github.com/veronesecoms/react-chat-front/actions) ![Uses TypeScript](https://img.shields.io/badge/Uses-Typescript-294E80.svg)
@@ -17,7 +17,7 @@ If you're looking for the frontend of this project, [click here](https://github.
 This is a basic real time chat developed to increase my knowledge in React, Node.js and Socket.io. If you feel it can help you with something, feel free to use partly or totally this code. :yum: 
 
 ## Apresentation
-![](public/ReactChatGif.gif)
+![](https://github.com/veronesecoms/react-chat-front/blob/master/public/ReactChatGif.gif)
 
 ## Technologies that i used
 * [Node.js](https://nodejs.org/en/)
