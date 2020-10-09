@@ -1,5 +1,6 @@
-const path = require('path')
+const path = require("path");
 
 module.exports = {
-  'migrations-path': path.resolve('src', 'migrations')
-}
+  "migrations-path": path.resolve("src", "migrations"),
+  "models-path": path.resolve("src", "models"),
+};

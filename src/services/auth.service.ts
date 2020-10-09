@@ -12,13 +12,14 @@ class AuthService {
     userData: UserDto
   ): Promise<{ jwtToken: string; findedUser: UserDto }> {
     const findedUser: UserDto = await this.users.findOne({
-      where: { email: userData.email, active: true }
+      where: { email: userData.email, active: true },
     });
-    if (!findedUser)
+    if (!findedUser) {
       throw new HttpException(
         409,
         `Não foi possível encontrar o e-mail ${userData.email}`
       );
+    }
 
     const isPasswordMatching: boolean = await bcrypt.compare(
       userData.password,
@@ -37,7 +38,7 @@ class AuthService {
     const dataStoredInToken: DataStoredInToken = { id: userId };
     const secret: string = process.env.JWT_SECRET;
     return {
-      token: jwt.sign(dataStoredInToken, secret)
+      token: jwt.sign(dataStoredInToken, secret),
     };
   }
 

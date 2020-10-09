@@ -1,18 +1,18 @@
 {
   "name": "react-chat-back",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "scripts": {
-    "start": "cross-env NODE_ENV=production ts-node --transpile-only src/server.ts",
+    "start": "npx sequelize-cli db:migrate && cross-env NODE_ENV=production ts-node --transpile-only src/server.ts",
     "dev": "cross-env NODE_ENV=development nodemon --watch src --delay 1 --exec 'ts-node' src/server.ts",
     "test": "jest --forceExit --detectOpenHandles",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
-  "engines": { "node" : "12.16.1" },
   "dependencies": {
-    "bcryptjs": "2.4.3",
+    "@types/socket.io": "^2.1.11",
+    "bcryptjs": "^2.4.3",
+    "reflect-metadata": "^0.1.13",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
-    "reflect-metadata": "^0.1.13",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
@@ -29,7 +29,9 @@
     "pg": "^8.3.2",
     "pg-hstore": "^2.3.3",
     "sequelize": "5.22.3",
+    "sequelize-cli-typescript": "^3.2.0-c",
     "sequelize-typescript": "^1.1.0",
+    "socket.io": "^2.3.0",
     "swagger-jsdoc": "^4.0.0",
     "swagger-ui-express": "^4.1.4",
     "ts-jest": "^26.2.0",
@@ -38,6 +40,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.7",
     "@types/dotenv": "^8.2.0",

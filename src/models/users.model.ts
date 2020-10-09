@@ -1,4 +1,4 @@
-import { Model, Table, Column, DefaultScope } from 'sequelize-typescript';
+import { Model, Table, Column } from 'sequelize-typescript';
 
 @Table({
   modelName: 'user',
